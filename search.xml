@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[test_one]]></title>
+    <url>%2F2019%2F07%2F10%2Ftest-one%2F</url>
+    <content type="text"><![CDATA[HTML构建页面的结构、CSS代码描述页面样式、JavaScript代码设计页面行为（动态特效）JavaScript是一种基于 对象 和 事件驱动 并具有安全性能的脚本语言。 123&lt;script type=&quot;text/javascript&quot;&gt; alert(&apos;hello javascript&apos;);&lt;/script&gt; 在浏览器中弹出一个提醒框 JavaScript是一种基于 对象 和 事件驱动 并具有安全性能的脚本语言。 &emsp;Java是一种面向对象的程序开发语言，需要“编译-链接-运行”&emsp;JavaScript只需经过“编写-运行” -特点:不用给变量指定数据类型（动态类型）、一个变量可以赋不同类型的值（弱类型）、解释性语言不需要编译，方便调试（简单性）、依赖浏览器本身，与操作环境无关（跨平台性）、主流浏览器统一支持的语言（必要性）、兼容性差 原始数据类型–Number、String、Boolean、Undefined、Null–使用 typeof 运算符，判断变量在某一时刻的数据类型–弱类型是指不同类型的变量之间可以相互赋值，但在某一时刻，一个变量只存在某一种数据类型–undefined类型，只有一个值undefined，指声明了但未赋值的变量–null不等同于空的字符串或0–NaN(Not a Number)表示一个没有意义、不正确的数值–与自身不相等 NaN != NaN–isNaN() 函数检测参数是否为NaN值–null == undefined 会返回true–undefined未定义的值，一个变量最原始的状态]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F07%2F09%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
