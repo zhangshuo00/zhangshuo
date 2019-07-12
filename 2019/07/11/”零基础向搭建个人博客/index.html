@@ -9,7 +9,7 @@
 
 
 
-<title>test_one | 不爱吃萝卜的兔子</title>
+<title>”零基础向搭建个人博客 | 不爱吃萝卜的兔子</title>
 
 
 
@@ -105,11 +105,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">test_one</h1>
+            <h1 class="post-title">”零基础向搭建个人博客</h1>
             
                 <div class="post-meta">
                     
@@ -118,7 +180,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 10, 2019&nbsp;&nbsp;16:12:50</a>
+                        Date: <a href="#">July 11, 2019&nbsp;&nbsp;16:52:32</a>
                         </span>
                     
                     
@@ -127,16 +189,25 @@
         </header>
 
         <div class="post-content">
-            <p><strong>HTML构建页面的结构、CSS代码描述页面样式、JavaScript代码设计页面行为（动态特效）</strong><br><strong>JavaScript是一种基于 对象 和 事件驱动 并具有安全性能的脚本语言。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    alert(&apos;hello javascript&apos;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在浏览器中弹出一个提醒框</p>
+            <blockquote>
+<h2 id="首先要选择blog的框架"><a href="#首先要选择blog的框架" class="headerlink" title="首先要选择blog的框架"></a><font face="黑体" color="#FF4500">首先要选择blog的框架</font></h2><ul>
+<li>hexo 插件多，所以选了从这个开始入手</li>
+<li>hugo 编译性能较好</li>
+</ul>
 </blockquote>
-<p><strong>JavaScript是一种基于 对象 和 事件驱动 并具有安全性能的脚本语言。</strong></p>
-<p>&emsp;Java是一种面向对象的程序开发语言，需要“编译-链接-运行”<br>&emsp;JavaScript只需经过“编写-运行”</p>
-<p>-特点:不用给变量指定数据类型（动态类型）、一个变量可以赋不同类型的值（弱类型）、解释性语言不需要编译，方便调试（简单性）、依赖浏览器本身，与操作环境无关（跨平台性）、主流浏览器统一支持的语言（必要性）、兼容性差</p>
-<p><strong>原始数据类型</strong><br>–Number、String、Boolean、Undefined、Null<br>–使用 typeof 运算符，判断变量在某一时刻的数据类型<br>–弱类型是指不同类型的变量之间可以相互赋值，但在某一时刻，一个变量只存在某一种数据类型</p>
+<ul>
+<li>jekyll 迁移和部署较方便</li>
+</ul>
+<hr>
+<blockquote>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a><font face="黑体" color="#FF4500">安装hexo</font></h2><pre><code>安装 node.js</code></pre><ul>
+<li>常用命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo  //安装hexo</span><br><span class="line">hexo init  //初始化</span><br><span class="line">hexo  //确认是否安装成功</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<pre><code>安装 git</code></pre><hr>
+<blockquote>
+<h2 id="通过GitHub-Pages部署到服务器"><a href="#通过GitHub-Pages部署到服务器" class="headerlink" title="通过GitHub Pages部署到服务器"></a><font face="黑体" color="#FF4500">通过GitHub Pages部署到服务器</font></h2></blockquote>
 
         </div>
 
@@ -151,7 +222,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://yoursite.com/2019/07/10/test-one/">http://yoursite.com/2019/07/10/test-one/</a></span>
+                        <span><a href="http://yoursite.com/2019/07/11/”零基础向搭建个人博客/">http://yoursite.com/2019/07/11/”零基础向搭建个人博客/</a></span>
                     </p>
                 
                 
@@ -184,10 +255,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/07/11/”零基础向搭建个人博客/">”零基础向搭建个人博客</a>
             
-            
-            <a class="next" rel="next" href="/2019/07/09/hello-world/">Hello World</a>
+            <a class="next" rel="next" href="/2019/07/10/test-one/">test_one</a>
             
         </section>
 
