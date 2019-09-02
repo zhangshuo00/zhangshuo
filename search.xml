@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[testhree]]></title>
+    <url>%2F2019%2F09%2F02%2Ftesthree%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[”零基础向搭建个人博客]]></title>
     <url>%2F2019%2F07%2F11%2F%E2%80%9D%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%90%91%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%2F</url>
     <content type="text"><![CDATA[首先要选择blog的框架 hexo 插件多，所以选了从这个开始入手 hugo 编译性能较好 jekyll 迁移和部署较方便 安装hexo安装 node.js 常用命令123npm install -g hexo //安装hexohexo init //初始化hexo //确认是否安装成功 安装 git 通过GitHub Pages部署到服务器]]></content>
