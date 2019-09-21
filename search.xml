@@ -2,8 +2,8 @@
 <search>
   <entry>
     <title><![CDATA[testhree]]></title>
-    <url>%2F2019%2F09%2F02%2Ftesthree%2F</url>
-    <content type="text"></content>
+    <url>%2F2019%2F09%2F02%2FnodeJs%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[nodejs是一个基于chrome v8引擎的JavaScript运行环境 仅使用一个线程 non-blocking I/O 非阻塞 一个线程永远在执行计算操作 event-driven 事件驱动 一些在centeOS中的常用命令 ls 查看当前目录 cd .. 切换到上级目录 mkdir 创建文件夹 touch file 新建文件 vim file 使用vim编辑文件 :wq 保存退出 :w 仅保存 123456const http = require('http');//引入http模块http.createServer((req,res)=&gt;&#123;//创建服务//req请求对象，res响应对象 res.end('hello world');//结束响应&#125;).listen(8080);//通过8080端口监听]]></content>
   </entry>
   <entry>
     <title><![CDATA[”零基础向搭建个人博客]]></title>
