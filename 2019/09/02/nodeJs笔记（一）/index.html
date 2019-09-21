@@ -207,24 +207,55 @@
 <h2 id="http-内置模块"><a href="#http-内置模块" class="headerlink" title="http 内置模块"></a>http 内置模块</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);<span class="comment">//引入http模块</span></span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;<span class="comment">//创建服务</span></span><br><span class="line"><span class="comment">//req请求对象，res响应对象</span></span><br><span class="line">    res.end(<span class="string">'hello world'</span>);<span class="comment">//结束响应</span></span><br><span class="line">&#125;).listen(<span class="number">8080</span>);<span class="comment">//通过8080端口监听</span></span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="全局"><a href="#全局" class="headerlink" title="全局"></a>全局</h2><ul>
+<h1 id="全局"><a href="#全局" class="headerlink" title="全局"></a>全局</h1><ul>
 <li><p>获取命令行参数</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arg = process.argv[];</span><br><span class="line"><span class="comment">//process是全局对象，argv返回一个包含命令行参数的数组</span></span><br><span class="line"><span class="comment">//第一个元素是'node'，第二个元素是文件名，接下来是命令行参数</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>当前进程的PID</p>
-<p><strong>process.pid</strong></p>
+<p><strong>[ process.pid ]</strong></p>
 </li>
 <li><p>退出码</p>
-<p><strong>process.exit(code)</strong></p>
+<p><strong>[ process.exit(code) ]</strong></p>
 </li>
+<li></li>
 </ul>
-<hr>
-<h2 id="输入输出流"><a href="#输入输出流" class="headerlink" title="输入输出流"></a>输入输出流</h2><ul>
-<li><p><strong>[process.stdout]</strong></p>
+<h3 id="输入输出流"><a href="#输入输出流" class="headerlink" title="输入输出流"></a>输入输出流</h3><ul>
+<li><p><strong>[ process.stdout ]</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">process.stdout.write(<span class="string">'hello world'</span>);</span><br><span class="line"><span class="comment">//指向标准输出流的可写的流(writable stream)</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>[process.stdin]</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">process.stdin.resume();</span><br><span class="line"><span class="keyword">var</span> a,b;</span><br><span class="line">process.stdout.write(<span class="string">'请输入a:'</span>);</span><br><span class="line">process.stdin.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a == <span class="literal">undefined</span>)&#123;</span><br><span class="line">        a = <span class="built_in">Number</span>(data);</span><br><span class="line">        process.stdout.write(<span class="string">'请输入b：'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        b = <span class="built_in">Number</span>(data);</span><br><span class="line">        process.stdout.write(<span class="string">'结果：'</span>+ (a+b));</span><br><span class="line">        process.exit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>[ process.stdin ]</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">process.stdin.resume();</span><br><span class="line"><span class="keyword">var</span> a,b;</span><br><span class="line">process.stdout.write(<span class="string">'请输入a:'</span>);</span><br><span class="line">process.stdin.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a == <span class="literal">undefined</span>)&#123;</span><br><span class="line">        a = <span class="built_in">Number</span>(data);</span><br><span class="line">        process.stdout.write(<span class="string">'请输入b：'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        b = <span class="built_in">Number</span>(data);</span><br><span class="line">        process.stdout.write(<span class="string">'结果：'</span>+ (a+b));</span><br><span class="line">        process.exit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//一个指向标准输入流的可读流（readable stream），标准输入流默认是暂停的，所以b必须调用process.stdin.resume()来恢复接收</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>[ process.stderr ]</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">process.stderr.write(<span class="string">'输出标出错误流'</span>);</span><br><span class="line"><span class="comment">//一个指向标准错误流的可写的流（writable stream）</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="处理信号量"><a href="#处理信号量" class="headerlink" title="处理信号量"></a>处理信号量</h3><ul>
+<li>接收信号量，并对（SIGINT 和 SIGSTP）进行处理<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">    process.on(<span class="string">'SIGINT'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Got SIGINT.  Press Control-D to exit.'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string">### 六个定时器函数</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>JavaScript</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span><span class="built_in">console</span>.log(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">setImmediate(<span class="function"><span class="params">()</span>=&gt;</span><span class="built_in">console</span>.log(<span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">process.nextTick(<span class="function"><span class="params">()</span>=&gt;</span><span class="built_in">console</span>.log(<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="params">()</span>=&gt;</span><span class="built_in">console</span>.log(<span class="number">4</span>));</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="params">()</span>=&gt;</span><span class="built_in">console</span>.log(<span class="number">5</span>))();<span class="comment">//立即执行函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//5</span></span><br><span class="line"><span class="comment">//3</span></span><br><span class="line"><span class="comment">//4</span></span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>同步任务比异步任务更早执行</p>
+</blockquote>
+<blockquote>
+<p>异步任务又分为两种：</p>
+<ul>
+<li>追加在本轮循环（event loop）的异步任务</li>
+<li>追加在次轮循环的异步任务</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>本轮循环一定早于次轮循环执行</p>
+<ul>
+<li><strong>[ setTimeout() ]</strong></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>[ setInterval() ]</strong></li>
+<li><strong>[ setImmediate() ]</strong></li>
+<li><strong>[ process.nextTick() ]</strong></li>
 </ul>
 
         </div>
