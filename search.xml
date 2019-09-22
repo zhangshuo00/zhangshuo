@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[nodeJs笔记（二）]]></title>
+    <url>%2F2019%2F09%2F21%2FnodeJs%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[事件所有的异步I/O操作在完成时都会发送一个事件到事件队列；许多对象都会分发事件，所有这些产生事件的对象都是 events.EventEmitter 的实例 例如fs.readStream对象会在文件被打开的时候触发一个事件 EventEmitter 类 核心：事件触发与事件监听器功能的封装 event对象注册了事件some_event 的监听器，通过setTimeout在1s后向event对象发送事件some_event，此时会调用监听器 1234567891011const EventEmitter = require('events').EventEmitter;var event = new EventEmitter();event.on('some_event',function()&#123; console.log('s_e 事件触发');&#125;);setTimeout(function()&#123; event.emit('some_event');&#125;,1000);//1s后//s_e 事件触发 EventEmitter 的每个事件由一个事件名和若干个参数组成，且EventEmitter 支持若干个事件监听器 当事件被触发时，监听器被依次调用，事件参数作为回调函数参数传递 12345678910111213const events = require('events');var e = new events.EventEmitter();e.on('some_event',function(arg1,arg2)&#123; console.log('listener1',arg1,arg2);&#125;);e.on('some_event',function(arg1,arg2)&#123; console.log('listener2',arg1,arg2);&#125;);e.emit('some_event','arg1 参数','arg2 参数');//listener1 arg1 参数 arg2 参数//listener2 arg1 参数 arg2 参数 on 用于绑定事件函数，emit 用于触发一个事件 方法 on(event,listener)为指定事件注册监听器，接收一个字符串event和一个回调函数 123server.on('connection',function(stream)&#123; console.log('someone connected');&#125;); addListener(event,listener)为指定事件添加一个监听器到监听器数组的尾部 once(event,listener)为指定事件注册一个单次监听器，最多触发一次，触发后立即解除 123server.once('connection',function(stream)&#123; console.log('once');&#125;); emit(event,[arg1],[arg2],[…])按监听器的顺序执行，如果事件有注册监听返回true removeListener(event,listener)移除指定事件的某个监听器，监听器必须是该事件已经注册过的监听器，第一个参数是事件名称，第二个是回调函数 12345var callback = function(stream)&#123; console.log('some connected');&#125;;server.on('connection',callback);server.removeListener('connection',callback);]]></content>
+      <tags>
+        <tag>nodeJs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[nodeJs笔记（一）]]></title>
     <url>%2F2019%2F09%2F02%2FnodeJs%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
     <content type="text"><![CDATA[nodejs是一个基于chrome v8引擎的JavaScript运行环境 仅使用一个线程 non-blocking I/O 非阻塞 一个线程永远在执行计算操作 event-driven 事件驱动 一些在centeOS中的常用命令 ls 查看当前目录 cd .. 切换到上级目录 mkdir 创建文件夹 touch file 新建文件 vim file 使用vim编辑文件 :wq 保存退出 :w 仅保存 http 内置模块123456const http = require('http');//引入http模块http.createServer((req,res)=&gt;&#123;//创建服务//req请求对象，res响应对象 res.end('hello world');//结束响应&#125;).listen(8080);//通过8080端口监听 全局获取命令行参数 123var arg = process.argv[];//process是全局对象，argv返回一个包含命令行参数的数组//第一个元素是'node'，第二个元素是文件名，接下来是命令行参数 当前进程的PID [ process.pid ] 退出码 [ process.exit(code) ] 输入输出流 [ process.stdout ] 12process.stdout.write('hello world');//指向标准输出流的可写的流(writable stream) [ process.stdin ] 1234567891011121314process.stdin.resume();var a,b;process.stdout.write('请输入a:');process.stdin.on('data',function(data)&#123; if(a == undefined)&#123; a = Number(data); process.stdout.write('请输入b：'); &#125;else&#123; b = Number(data); process.stdout.write('结果：'+ (a+b)); process.exit(); &#125;&#125;);//一个指向标准输入流的可读流（readable stream），标准输入流默认是暂停的，所以b必须调用process.stdin.resume()来恢复接收 [ process.stderr ] 12process.stderr.write('输出标出错误流');//一个指向标准错误流的可写的流（writable stream） 处理信号量 接收信号量，并对（SIGINT 和 SIGSTP）进行处理 123process.on('SIGINT',function()&#123; console.log('Got SIGINT. Press Control-D to exit.');&#125;) 六个定时器函数1234567891011setTimeout(()=&gt;console.log(1));setImmediate(()=&gt;console.log(2));process.nextTick(()=&gt;console.log(3));Promise.resolve().then(()=&gt;console.log(4));(()=&gt;console.log(5))();//立即执行函数//5//3//4//1//2 同步任务比异步任务更早执行 异步任务又分为两种： 追加在本轮循环（event loop）的异步任务 追加在次轮循环的异步任务 本轮循环一定早于次轮循环执行 process.nextTick() 和 Promise的回调函数追加在本轮循环；setTimeout、setInterval、setImmediate的回调函数追加在次轮循环 [ setTimeout() ] [ setInterval() ] [ setImmediate() ] [ process.nextTick() ]]]></content>
+      <tags>
+        <tag>nodeJS</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[”零基础向搭建个人博客]]></title>
