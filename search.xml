@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[我和小萌的lovelog]]></title>
+    <url>%2F2019%2F09%2F23%2F%E6%88%91%E5%92%8C%E5%B0%8F%E8%90%8C%E7%9A%84lovelog%2F</url>
+    <content type="text"><![CDATA[春夏秋冬，你若在场，就很美好]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[nodeJs笔记（三）]]></title>
     <url>%2F2019%2F09%2F22%2FnodeJs%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[流 stream流是什么 流是数据的集合，在操作大量数据或数据从外部逐段发送过来的时候变得非常有用 可以像通过管道连接linux命令一样，通过pipe组合功能 流的四种基本类型可读流可写流双工流转换流]]></content>
+    <content type="text"><![CDATA[流 stream流是什么 流是数据的集合，在操作大量数据或数据从外部逐段发送过来的时候变得非常有用 可以像通过管道连接linux命令一样，通过pipe组合功能 所有的流都是 EventEmitter 的实例， 实现流 使用流 流的四种基本类型可读流可写流双工流转换流]]></content>
   </entry>
   <entry>
     <title><![CDATA[nodeJs笔记（二）]]></title>
