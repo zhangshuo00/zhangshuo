@@ -195,13 +195,49 @@
 <li>所有的流都是 <strong><em>EventEmitter</em></strong> 的实例，</li>
 </ul>
 <hr>
+<h2 id="使用流"><a href="#使用流" class="headerlink" title="使用流"></a><strong>使用流</strong></h2><h3 id="pipe方法"><a href="#pipe方法" class="headerlink" title="pipe方法"></a>pipe方法</h3><blockquote>
+<p>使用管道的方式将流连接起来</p>
+</blockquote>
 <ul>
-<li><strong><em>实现流</em></strong></li>
-<li><strong><em>使用流</em></strong></li>
+<li><p>将可读流的输出连接到可写流的输入，管道的source必须是可读流，destination必须是可写流</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readableSrc.pipe(writableDest);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可以是双工流/转换流</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readableSrc.pipe(transformStream1).pipe(transformStream2).pipe(finalWritableDest)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="流事件（更自定义的方式使用流）"><a href="#流事件（更自定义的方式使用流）" class="headerlink" title="流事件（更自定义的方式使用流）"></a>流事件（更自定义的方式使用流）</h3><ul>
+<li><p>直接通过事件读取，模拟pipe的读取、写入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//readable.pipe(writable)</span></span><br><span class="line">readable.on(<span class="string">'data'</span>,(chunk)=&gt;&#123;</span><br><span class="line">    writable.write(chunk);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">readable.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">    writable.end();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可读流、可写流的事件和方法</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/6/14/03e1f627b419676dbb727ab9bc35e77e?imageslim" alt="image"><br><strong>Readable Streams的两个重要事件</strong></p>
+<ul>
+<li><strong>data</strong> 事件，当可读流发送数据给消费者时，会触发</li>
+<li><strong>end</strong> 事件，可读流数据发送完成时触发</li>
+</ul>
+<p><strong>Writeable Streams的两个重要事件</strong></p>
+<ul>
+<li><strong>drain</strong> 事件，表示可写流可以接收更多数据的信号</li>
+<li><strong>finish</strong> 事件，当所有数据都被写入底层系统后会触发</li>
+</ul>
+</li>
+</ul>
+<h3 id="可读流的暂停和流动模式"><a href="#可读流的暂停和流动模式" class="headerlink" title="可读流的暂停和流动模式"></a>可读流的暂停和流动模式</h3><p>可读流的两种模式：<strong>暂停模式、流动模式（或拉取模式、推送模式）</strong></p>
+<ul>
+<li><p>所有可读流默认处于暂停模式，可以使用 <strong>read()</strong> 方法读取数据</p>
+</li>
+<li><p>当可读流处于流动模式时，需要通过事件监听来处理数据</p>
+</li>
+<li><p>增加一个 <strong>data</strong> 事件回调可以把处于暂停模式的流切换到流动模式，同样移除 <strong>data</strong> 事件回调会把流切换到暂停模式</p>
+</li>
+<li><p>可以使用 <strong>resume()</strong> 和 <strong>pause()</strong> 方法手动在两个模式间切换</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/6/14/13f0741c15459b5ef6d9e91f8c977a30?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image"></p>
+</li>
 </ul>
 <hr>
-<h2 id="流的四种基本类型"><a href="#流的四种基本类型" class="headerlink" title="流的四种基本类型"></a>流的四种基本类型</h2><h3 id="可读流"><a href="#可读流" class="headerlink" title="可读流"></a>可读流</h3><h3 id="可写流"><a href="#可写流" class="headerlink" title="可写流"></a>可写流</h3><h3 id="双工流"><a href="#双工流" class="headerlink" title="双工流"></a>双工流</h3><h3 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h3><hr>
-
+<h2 id="实现流"><a href="#实现流" class="headerlink" title="实现流"></a><strong>实现流</strong></h2>
         </div>
 
         
