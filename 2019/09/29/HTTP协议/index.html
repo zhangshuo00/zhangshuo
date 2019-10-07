@@ -9,7 +9,7 @@
 
 
 
-<title>我和小萌的lovelog | 不爱吃萝卜的兔子</title>
+<title>HTTP协议 | 不爱吃萝卜的兔子</title>
 
 
 
@@ -105,73 +105,11 @@
             <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    document.ready(
-        function () {
-            tocbot.init({
-                tocSelector: '.tocbot-list',
-                contentSelector: '.post-content',
-                headingSelector: 'h1, h2, h3, h4, h5',
-                collapseDepth: 1,
-                orderedList: false,
-                scrollSmooth: true,
-            })
-        }
-    )
-
-    function expand_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 6,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "collapse_toc()");
-        b.innerHTML = "Collapse all"
-    }
-
-    function collapse_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 1,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "expand_toc()");
-        b.innerHTML = "Expand all"
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-</script>
-    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">我和小萌的lovelog</h1>
+            <h1 class="post-title">HTTP协议</h1>
             
                 <div class="post-meta">
                     
@@ -180,7 +118,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">September 23, 2019&nbsp;&nbsp;21:20:13</a>
+                        Date: <a href="#">September 29, 2019&nbsp;&nbsp;19:07:36</a>
                         </span>
                     
                     
@@ -189,7 +127,7 @@
         </header>
 
         <div class="post-content">
-            <h1 id="春夏秋冬，你若在场，就很美好"><a href="#春夏秋冬，你若在场，就很美好" class="headerlink" title="春夏秋冬，你若在场，就很美好"></a>春夏秋冬，你若在场，就很美好</h1>
+            
         </div>
 
         
@@ -203,7 +141,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://yoursite.com/2019/09/23/我和小萌的lovelog/">http://yoursite.com/2019/09/23/我和小萌的lovelog/</a></span>
+                        <span><a href="http://yoursite.com/2019/09/29/HTTP协议/">http://yoursite.com/2019/09/29/HTTP协议/</a></span>
                     </p>
                 
                 
@@ -236,10 +174,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/09/29/HTTP协议/">HTTP协议</a>
+                <a class="prev" rel="prev" href="/2019/09/29/文件系统/">文件系统</a>
             
             
-            <a class="next" rel="next" href="/2019/09/22/nodeJs笔记（三）/">nodeJs笔记（三）</a>
+            <a class="next" rel="next" href="/2019/09/23/我和小萌的lovelog/">我和小萌的lovelog</a>
             
         </section>
 
