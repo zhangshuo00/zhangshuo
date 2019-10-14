@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="description" content="pb">
+
+
+
+<title>nodeJs笔记（四）-子进程 | 不爱吃萝卜的兔子</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">不爱吃萝卜的兔子&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">不爱吃萝卜的兔子&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">nodeJs笔记（四）-子进程</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">eason Zhang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 14, 2019&nbsp;&nbsp;11:04:25</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="node中的单线程和单进程"><a href="#node中的单线程和单进程" class="headerlink" title="node中的单线程和单进程"></a>node中的单线程和单进程</h2><p>首先回顾一下，node是一个基于Chrome V8引擎的JavaScript运行环境。node使用事件驱动，非阻塞I/O的模型。</p>
+<p>我们所说的单线程是指node中只有一个js引擎在主线程上运行，其他异步IO和事件驱动相关的线程通过libuv实现内部的线程池和线程调度。</p>
+<blockquote>
+<p>进程是资源分配的基本单位，线程是任务调度和执行的基本单位</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/10/14/Pv2wRSixOhea3Zc.png" alt="eventLoop.png"></p>
+<p>event loop就是维持一个执行栈和一个事件队列，当前执行栈中的如果发现异步IO以及定时器等函数，就会把这些异步回调函数放到事件队列中，当前执行栈执行完后，从事件队列中，按照一定的顺序执行回调函数。</p>
+<hr>
+<h2 id="node中的-child-process-模块实现多进程"><a href="#node中的-child-process-模块实现多进程" class="headerlink" title="node中的 child_process 模块实现多进程"></a>node中的 child_process 模块实现多进程</h2><p>通过child_process模块，可以实现一个主进程，多个子进程的模式，主进程成为master进程，子进程又称为工作进程。</p>
+<p>在子进程中不仅可以<code>调用其他node程序，也可以执行非node程序以及shell命令</code>，执行完子进程后，<code>以流或者回调的形式返回</code></p>
+<h3 id="child-process-模块提供的API"><a href="#child-process-模块提供的API" class="headerlink" title="child_process 模块提供的API"></a>child_process 模块提供的API</h3><p>child_process 提供的4个方法（异步）</p>
+<ul>
+<li><strong>spawn</strong>：子进程中执行的<code>非node程序</code>，<code>提供一组参数</code>后，执行结果以<code>流的形式返回</code>。</li>
+<li><strong>execFile</strong>：子进程中执行的<code>非node程序</code>，<code>提供一组参数</code>后，执行结果以<code>回调的形式</code>返回。</li>
+<li><strong>exec</strong>：子进程中执行的<code>非node程序</code>，传入<code>一串shell命令</code>，执行后结果以<code>回调的形式</code>返回。</li>
+<li><strong>fork</strong>：子进程执行的是<code>node程序</code>，<code>提供一组参数</code>后，执行后结果以<code>流的形式</code>返回。<br><img src="https://i.loli.net/2019/10/14/1IsD4w2TCj8eL3P.png" alt="child_processAPI.png"></li>
+</ul>
+<h3 id="execFile-和-exec"><a href="#execFile-和-exec" class="headerlink" title="execFile 和 exec"></a>execFile 和 exec</h3><ul>
+<li>相同点：执行的都是非node程序，且执行后的结果都以回调的形式返回。</li>
+<li>不同点：exec是执行一段shell命令，而execFile是执行一个应用。<!-- 后补一篇shell命令的文章，在此处引用 -->
+</li>
+</ul>
+<ol>
+<li><p>通过exec实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);<span class="comment">//引入child_process模块</span></span><br><span class="line">cp.exec(<span class="string">'echo hello world'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,stdout</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(stdout);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>执行文件，输出<code>hello world</code>，exec的第一个参数，和shell命令完全相似</p>
+</li>
+<li><p>通过execFile实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line">cp.execFile(<span class="string">'echo'</span>,[<span class="string">'hello'</span>,<span class="string">'world'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">err,stdout</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(stdout);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>execFile会在process.env.PATH的路径中依次寻找是否有’echo’的应用，找到后就会执行。<code>&#39;echo&#39;程序存在&#39;usr/local/bin&#39;目录中</code>，传入hello和world两个参数，执行后返回。</p>
+</li>
+<li><p>安全性分析<br>exec 直接执行一段shell是极为不安全的；<br>而execFile会检测传入实参执行的安全性，如果存在安全性问题，会抛出异常，安全性较高。</p>
+<h3 id="spawn"><a href="#spawn" class="headerlink" title="spawn"></a>spawn</h3><p>spawn用于执行非node应用，且不能直接执行shell，与execFile相比，spawn执行应用后并不是一次性输出的，而是以流的形式输出，可以明显减少内存的占用。<br><img src="https://i.loli.net/2019/10/14/fw9zOBPJ3eFEhTm.png" alt="spawn_case.png"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"><span class="keyword">let</span> cat = cp.spawn(<span class="string">'cat'</span>,[<span class="string">'input.txt'</span>]);</span><br><span class="line"><span class="keyword">let</span> sort = cp.spawn(<span class="string">'sort'</span>);</span><br><span class="line"><span class="keyword">let</span> uniq = cp.spawn(<span class="string">'uniq'</span>);</span><br><span class="line"></span><br><span class="line">cat.stdout.pipe(sort.stdin);<span class="comment">//读取input.txt中的内容</span></span><br><span class="line"></span><br><span class="line">sort.stdout.pipe(uniq.stdin);<span class="comment">//sort程序实现排序功能</span></span><br><span class="line">uniq.stdout.pipe(process.stdout);<span class="comment">//uniq程序实现去重</span></span><br><span class="line"><span class="built_in">console</span>.log(process.stdout);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h3><p>在node中使用内置于父进程和子进程之间的通信来处理大量计算的任务，从而降低大数据运行的压力。<br><strong>通过fork方法在单独的进程中执行node程序，并且通过父子间的通信，子进程接受父进程的信息，并将执行后的结果返回给父进程。</strong><br><strong>使用fork方法可以在父进程和子进程之间开发一个IPC通道，使不同的node进程间可以进行消息通信。</strong></p>
+<p>在child.js中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process.on(<span class="string">'message'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">    process.send(msg);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在parent.js中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"><span class="keyword">let</span> child = cp.fork(<span class="string">'./child'</span>);</span><br><span class="line"></span><br><span class="line">child.on(<span class="string">'message'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'got a message is'</span>,msg);</span><br><span class="line">&#125;);</span><br><span class="line">child.send(<span class="string">'hello world'</span>);</span><br><span class="line"><span class="comment">//got a message is hello world</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//在父进程中调用，中断父子间通信</span></span><br><span class="line">child.disconnect()</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>eason Zhang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://yoursite.com/2019/10/14/nodeJs笔记（四）-子进程/">http://yoursite.com/2019/10/14/nodeJs笔记（四）-子进程/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY<strong>?</strong></strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2019/10/08/React笔记（一）/">React笔记（一）</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© eason Zhang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
