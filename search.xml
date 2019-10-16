@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[React笔记（四）-router]]></title>
+    <url>%2F2019%2F10%2F16%2FReact%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-router%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[React笔记（三）-Virtual DOM]]></title>
+    <url>%2F2019%2F10%2F16%2FReact%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Virtual-DOM%2F</url>
+    <content type="text"><![CDATA[一种编程的概念，是指虚拟的视图被保存在内存中，并通过诸如ReactDOM这样的库与真实的DOM保持同步，这一过程叫做Reconciliation 协调 差分算法（diff） 采用同级比对 比较不同类型的元素时，将删除旧元素并从零开始重构新元素 比较相同类型的ReactDOM元素时，则比较两者的属性，保持相同的底层DOM节点，并仅更新变化的属性 当组件更新时，实例保持相同，这样状态被维持]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[React笔记（二）-Advanced Guides]]></title>
+    <url>%2F2019%2F10%2F16%2FReact%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Advanced-Guides%2F</url>
+    <content type="text"><![CDATA[ContextHOC Portals Portals提供了一种能让子节点渲染到父组件之外的方式 123ReactDOM.createPortal(child,container);//child 是任何可渲染的React子元素//container 是一个DOM元素 当父组件有overflow:hidden / z-index时，需要子组件能够在视觉上跳出容器时使用。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[nodeJs笔记（五）-net模块]]></title>
     <url>%2F2019%2F10%2F14%2FnodeJs%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89-net%E6%A8%A1%E5%9D%97%2F</url>
     <content type="text"><![CDATA[服务器和客户端之间的交互关于数据交互，可以想象成，server和client之间建立了一个pipe，pipe有两个分支，一个用于发送 s 到 c 的数据，一个用于发送 c 到 s 的数据。server会监听端口，而client去访问端口，在Unix/Linux中，也可以监听文件。 node如何开启一个 TCP 服务器 TCP全名为传输控制协议，在OSI模型中属于传输层协议 创建TCP服务器端123456789101112131415var net = require('net');var server = net.createServer(function(socket)&#123; socket.on('data',function(data)&#123; socket.write('hello'); &#125;); socket.on('end',function()&#123; console.log('connected filed'); &#125;);&#125;);server.listen(8080,function()&#123; console.log('server bound');&#125;); 使用telnet 192.168.91.144 8080作为客户端对刚才创建的简单服务器进行会话交流 TCP服务的事件 服务器事件 listening：通过server.listen(port,listeningListener)，第二个参数传入 connection：通过net.createServer()，最后一个参数传递 close error 连接事件 data end connect drain error close timeout 构建UDP服务 在UDP中，一个套接字可以与多个UDP服务通信，特点：面向事务提供简单的不可靠信息传输服务，但无须连接，资源消耗低，处理快速灵活。 创建UDP服务器端1234567891011121314//创建UDP套接字const dgram = require('dgram');var socket = dgram.createSocket('udp4');socket.bind(8080);//绑定端口socket.on('message',(msg)=&gt;&#123; var line = msg.toString('utf-8'); process.stdout.write(line,line.length);&#125;);socket.on('listening',()=&gt;&#123; console.log('server ready: ',socket.address());&#125;); 创建UDP客户端调用send()方法发送消息到网络中，socket.send(buf, offset, length, port, address, [callback]) 123456789const dgram = require('dgram'), socket = dgram.createSocket('udp4');var host = process.argv[2];var port = process.argv[3];process.stdin.on('data',(data)=&gt;&#123; var line = data.toString('utf-8'); socket.send(line,0,line.length,port,host);&#125;); UDP套接字事件 message：接收到消息时触发该事件 listening：当UDP套接字开始侦听时触发该事件 close error]]></content>
