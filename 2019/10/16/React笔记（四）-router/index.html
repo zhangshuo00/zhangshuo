@@ -105,6 +105,68 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
@@ -127,7 +189,49 @@
         </header>
 
         <div class="post-content">
-            
+            <h2 id="路由配置"><a href="#路由配置" class="headerlink" title="路由配置"></a>路由配置</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>React Router包含三个库，<strong>react-router、react-router-dom、react-router-native</strong></p>
+<blockquote>
+<p>npm install –save react-router-dom</p>
+</blockquote>
+<h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>React Router 通过 Router 和 Route两个组件完成路由功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;BrowserRouter <span class="keyword">as</span> Router,Route,Link&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line">exports <span class="keyword">default</span> calss Hello extends Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Router&gt;</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    &lt;Route exact path=<span class="string">'/'</span> component=&#123;Home&#125;/&gt;</span><br><span class="line">                    &lt;Route path=<span class="string">'/about'</span> component=&#123;About&#125;/&gt;</span><br><span class="line">                &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Router&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="BrowserRouter-和-HashRouter"><a href="#BrowserRouter-和-HashRouter" class="headerlink" title="BrowserRouter 和 HashRouter"></a>BrowserRouter 和 HashRouter</h3><p><strong>特点</strong></p>
+<ul>
+<li>都是路由的基本组件，需将其放在最外层，选其一使用</li>
+<li>内部只能含有一个子节点</li>
+<li>BrowserRouter 的URL是指向真实URL的资源路径，页面和浏览器的history保持一致</li>
+<li>HashRouter 使用URL中的hash（#）部分去创建路由<br>  <strong><a href="http://example.com/#/some/path" target="_blank" rel="noopener">http://example.com/#/some/path</a></strong></li>
+<li>BrowserRouter 创建的URL<br><strong><a href="http://example.com/some/path" target="_blank" rel="noopener">http://example.com/some/path</a></strong></li>
+<li>Router 会创建一个history对象，history用来跟踪URL，当URL发生变化时，Router的后代组件会重新渲染。ReactRouter 中提供的其他组件可以通过 context获取 history对象，ReactRouter 中其他组件必须作为Router组件的后代使用，但只能包含唯一一个子元素。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">        &lt;BrowserRouter&gt;</span><br><span class="line">            &lt;App /&gt;</span><br><span class="line">            <span class="comment">//&lt;App /&gt;</span></span><br><span class="line">        &lt;<span class="regexp">/BrowserRouter&gt;</span></span><br><span class="line"><span class="regexp">    ),document.getElementById('root')</span></span><br><span class="line"><span class="regexp">)</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="路由器"><a href="#路由器" class="headerlink" title=" 路由器"></a><route> 路由器</route></h3><p><strong>每当有一个组件需要根据URL决定是否渲染时，就需要创建一个Route</strong></p>
+<ul>
+<li>匹配路径、挂载组件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route exact path=<span class="string">'/home'</span> component=&#123;Home&#125;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>1. path</strong><br>    <strong>当使用 BrowserRouter 时，path 用来描述这个Route 匹配的URL的pathname；当使用HashRouter 时，path 用来描述这个Route 匹配到的URL的 hash。当URL 匹配一个Route时，这个 Route中定义的组件就会被渲染出来。</strong></p>
+<p><strong>2. match</strong><br>    <strong>当URL和Route匹配时，Route 会创建一个 match 对象作为props 中的一个属性传递给被渲染的组件，以下为对象包含的属性：</strong><br>（1）params：Route的path 可以包含参数，例如<route path="/foo/:id">。params就是用于从匹配的URL中解析出 path 中的参数。例如，当 URL = ‘<a href="http://example.ocm/foo/1&#39;" target="_blank" rel="noopener">http://example.ocm/foo/1&#39;</a> 时，params= {id: 1}。<br>（2）isExact：布尔值，判断URL 是否完全匹配。例如，当 path=’/foo’、URL=”<a href="http://example.com/foo&quot;" target="_blank" rel="noopener">http://example.com/foo&quot;</a> 时，是完全匹配; 当 URL=”<a href="http://example.com/foo/1&quot;" target="_blank" rel="noopener">http://example.com/foo/1&quot;</a> 时，是部分匹配。<br>（3）path：Route 的path 属性，构建嵌套路由时会使用到。<br>（4）url：URL 的匹配的方式</route></p>
+<p><strong>3. Route 渲染组件的方式</strong><br>   （1）component<br>   component 的值是一个组件，当URL 和Route 匹配时，component属性定义的组件就会被渲染。<br>   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=<span class="string">'/foo'</span> component=&#123;foo&#125;/&gt;</span><br><span class="line"><span class="comment">//当URL = 'http://example.com/foo'时，Foo 组件会被渲染</span></span><br></pre></td></tr></table></figure></p>
+<p>   （2）render<br>   render 的值是一个函数，返回一个React 元素，并且可以为待渲染的组件传递额外的属性。<br>   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=<span class="string">'/foo'</span> render=&#123;(props)=&gt;&#123;</span><br><span class="line">    &lt;Foo &#123;...props&#125; data=&#123;extraProps&#125;/&gt;</span><br><span class="line">    <span class="comment">//Foo 组件接收一个额外的data 属性</span></span><br><span class="line">&#125;&#125;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>   （3）children<br>   children 的值是一个函数，返回要渲染的React 元素，但无论是否匹配成功，返回的组件都会被渲染。</p>
+<p><strong>4. Switch 和exact</strong><br>    当URL 和多个Route 匹配时，这些Route 都会被渲染，但如果只想让第一个匹配的Route 沉浸，可以把这些Route 放到一个Switch 组件中。如果想让URL 和Route 完全匹配时才渲染，可以使用Route 的exact 属性。<br>    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Router&gt;</span><br><span class="line">    &lt;Switch&gt;</span><br><span class="line">        &lt;Route exact path=<span class="string">'/'</span> component=&#123;Home&#125;/&gt;</span><br><span class="line">        &lt;Route exact path=<span class="string">'/posts'</span> component=&#123;Posts&#125; /&gt;</span><br><span class="line">        &lt;Route exact path=<span class="string">'/:user'</span> component=&#123;User&#125; /&gt;</span><br><span class="line">    &lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>Router&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>5. 嵌套路由是指在Route 渲染的组件内部再定义新的Route。</strong></p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><strong>Link 是React Router提供的链接组件，当点击时，页面该跳转到哪个路由</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;&lt;Link to='/'&gt;Home&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;Link to='/post'&gt;Post&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">    &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>header&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用to 属性声明要导航到的URL 地址，当to 为object 类型时，可以包含pathname、search、hash、state四个属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Link to=&#123;&#123;</span><br><span class="line">  pathname: <span class="string">'/posts'</span>,</span><br><span class="line">  search: <span class="string">'?sort=name'</span>,</span><br><span class="line">  hash:<span class="string">'#the-hash'</span>,</span><br><span class="line">  state: &#123; <span class="attr">fromHome</span>: <span class="literal">true</span>&#125;</span><br><span class="line">&#125;&#125;&gt;</span><br><span class="line">&lt;<span class="regexp">/Link&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>除了使用Link ，还可以使用history 对象手动实现导航。history 中的两个方法:push(path,[state])会向浏览器新增一条记录 和 replace(path,[state])会用新纪录替换记录。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">history.push(<span class="string">'/posts'</span>);</span><br><span class="line">history.replace(<span class="string">'/posts'</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h2><hr>
+<h2 id="关于hooks和useEffect"><a href="#关于hooks和useEffect" class="headerlink" title="关于hooks和useEffect"></a>关于hooks和useEffect</h2>
         </div>
 
         
@@ -173,6 +277,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/10/29/nodeJs笔记-数据存储/">nodeJs笔记（六）-数据存储</a>
             
             
             <a class="next" rel="next" href="/2019/10/16/React笔记（三）-Virtual-DOM/">React笔记（三）-Virtual DOM</a>
