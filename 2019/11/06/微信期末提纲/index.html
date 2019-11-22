@@ -198,22 +198,46 @@
 <ul>
 <li>前后端通信、安全加密、web协议（HTTPS/HTTP）</li>
 <li>数据库、web开发框架、云服务器、备案</li>
-<li><h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2></li>
+</ul>
+<p>JSON</p>
+<ul>
 <li>一种用于传输和存储数据的格式</li>
 <li>简单、轻量、解析速度比较快</li>
 </ul>
-<h2 id="小程序："><a href="#小程序：" class="headerlink" title="小程序："></a>小程序：</h2><ul>
-<li><p>小程序项目目录结构</p>
-<ul>
-<li>js文件控制页面逻辑</li>
-<li>wxml以及wxss文件用于页面布局以及样式</li>
-</ul>
-<p>|_comps //自定义第三方组件<br>|_pages //页面所在的目录，每个页面都是其中一个目录<br>|  |_index<br>|  |  |_index.js<br>|  |  |_index.json<br>|  |  |_index.wxml<br>|  |  |_index.wxss<br>|  |<br>|  |_info<br>|  |_logs<br>|<br>|_utils //工具函数<br>|_app.js //小程序启动时，app.js中的APP实例会运行及初始化操作<br>|_app.json //小程序全局配置文件<br>|_app.wxss //全局样式表</p>
+<h2 id="小程序："><a href="#小程序：" class="headerlink" title="小程序："></a>小程序：</h2><h3 id="小程序项目目录结构"><a href="#小程序项目目录结构" class="headerlink" title="小程序项目目录结构"></a>小程序项目目录结构</h3><ul>
+<li><p>js文件控制页面逻辑</p>
+</li>
+<li><p>wxml以及wxss文件用于页面布局以及样式</p>
+<p>|<strong><em>comps //自定义第三方组件<br>|</em></strong>pages //页面所在的目录，每个页面都是其中一个目录<br>|  |<strong><em>index<br>|  |  |</em></strong>index.js<br>|  |  |<strong><em>index.json<br>|  |  |</em></strong>index.wxml<br>|  |  |<strong><em>index.wxss<br>|  |<br>|  |</em></strong>info<br>|  |<strong><em>logs<br>|<br>|</em></strong>utils //工具函数<br>|<strong><em>app.js //小程序启动时，app.js中的APP实例会运行及初始化操作<br>|</em></strong>app.json //小程序全局配置文件<br>|___app.wxss //全局样式表</p>
 </li>
 </ul>
-<ul>
-<li><p>小程序页面生命周期（基本流程以及相关回调函数）</p>
-<ul>
+<h3 id="设置-tabBar"><a href="#设置-tabBar" class="headerlink" title="设置 tabBar"></a>设置 tabBar</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'tabBar'</span> :&#123;</span><br><span class="line">  <span class="string">'list'</span> :[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">'pagePath'</span>:<span class="string">''</span>,</span><br><span class="line">      <span class="string">'text'</span>:<span class="string">''</span>,</span><br><span class="line">      <span class="string">'iconPath'</span>:<span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;...&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="小程序没有DOM-和-BOM操作，框架核心是一个响应的数据绑定系统，在逻辑层修改数据"><a href="#小程序没有DOM-和-BOM操作，框架核心是一个响应的数据绑定系统，在逻辑层修改数据" class="headerlink" title="小程序没有DOM 和 BOM操作，框架核心是一个响应的数据绑定系统，在逻辑层修改数据"></a>小程序没有DOM 和 BOM操作，框架核心是一个响应的数据绑定系统，在逻辑层修改数据</h3><h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><ul>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">switchTab(&#123;<span class="comment">//跳转页面，需要在 app.json中tabBar定义页面</span></span><br><span class="line">  url:<span class="string">'/pages/index/index'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.reLaunch(&#123;<span class="comment">//关闭所有页面，并打开应用的某个页面</span></span><br><span class="line">  url:<span class="string">'/pages/index/index'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.redirectTo(&#123;<span class="comment">//关闭当前页面，跳转到应用的某个页面，但不允许跳到tabBar页面</span></span><br><span class="line">  url:<span class="string">'/pages/index/index'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.navigateTo(&#123;<span class="comment">//...............并使用 wx.navigateBack() 可以返回原页面</span></span><br><span class="line">  url:<span class="string">'/pages/index/index'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="一些标签和属性"><a href="#一些标签和属性" class="headerlink" title="一些标签和属性"></a>一些标签和属性</h3><ul>
+<li><image src mode></image></li>
+<li><camera></camera></li>
+<li>wx.getSystemInfo  获取系统信息</li>
+<li>wx.getBatteryInfo 获取电量信息</li>
+<li>wx.getNetworkType 网络状态信息</li>
+<li>wx.onNetworkStatusChange 监听网络状态</li>
+<li>startCompass 启用罗盘</li>
+<li>在回调函数中调用 onCompassChange 监听变化</li>
+<li>wx.onDeviceMotionChange 设备方向</li>
+</ul>
+<h3 id="titbit-web框架"><a href="#titbit-web框架" class="headerlink" title="titbit web框架"></a>titbit web框架</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> titbit = <span class="built_in">require</span>(<span class="string">'titbit'</span>);</span><br><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> titbit(&#123;</span><br><span class="line">  debug : <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> &#123;router&#125; = app;</span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span> c =&gt;&#123;</span><br><span class="line">  c.res.body = <span class="string">'ok'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">app.run(<span class="number">8080</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="小程序页面生命周期（基本流程以及相关回调函数）"><a href="#小程序页面生命周期（基本流程以及相关回调函数）" class="headerlink" title="小程序页面生命周期（基本流程以及相关回调函数）"></a>小程序页面生命周期（基本流程以及相关回调函数）</h3><ul>
 <li>进入/切换一个新页面时，调用的生命周期函数</li>
 <li>onLoad &gt; onReady &gt; onShow</li>
 <li>onLoad 监听页面加载</li>
@@ -227,56 +251,49 @@
 <li>onPageScroll 页面滚动触发事件</li>
 <li>onTabItemTap 当前是tab页时，点击tab时触发</li>
 </ul>
-</li>
-<li><p>注册小程序以及如何对接开发者服务器域名的一些注意点和限制规则</p>
-<ul>
+<h3 id="注册小程序以及如何对接开发者服务器域名的一些注意点和限制规则"><a href="#注册小程序以及如何对接开发者服务器域名的一些注意点和限制规则" class="headerlink" title="注册小程序以及如何对接开发者服务器域名的一些注意点和限制规则"></a>注册小程序以及如何对接开发者服务器域名的一些注意点和限制规则</h3><ul>
 <li>限制必须要使用域名，并且不能使用端口号</li>
 <li>一台服务器要运行多个服务，但对外仅仅提供80/443的端口访问，需要使用反向代理解决</li>
 <li>小程序对接开发者域名需要通过签名证书开启HTTPS服务</li>
 <li>编辑Nginx配置文件支持SSL</li>
 <li>服务器开启HTTPS，域名要备案</li>
 </ul>
+<h3 id="小程序如何发起网络请求"><a href="#小程序如何发起网络请求" class="headerlink" title="小程序如何发起网络请求"></a>小程序如何发起网络请求</h3><ul>
+<li><p>发起请求前需要先在后台设置安全域名</p>
 </li>
-<li><p>小程序如何发起网络请求</p>
-<ul>
-<li>发起请求前需要先在后台设置安全域名</li>
-<li>通过API中的 wx.request 可以发起网络请求</li>
-<li>常用的请求类型：GET、POST、PUT、DELETE、OPTIONS<br>发起GET请求<br>data:{name:’zhangsan’},<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">  url:<span class="string">'https://a.example.com/test'</span>,</span><br><span class="line">  dataType:<span class="string">'text'</span>,</span><br><span class="line">  success:<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      getReturn:res.data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<li><p>通过API中的 wx.request 可以发起网络请求</p>
+</li>
+<li><p>常用的请求类型：GET、POST、PUT、DELETE、OPTIONS<br>发起GET请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">  url:<span class="string">'https://a.example.com/test'</span>,</span><br><span class="line">  data:&#123;<span class="attr">name</span>:<span class="string">'zhangsan'</span>&#125;,</span><br><span class="line">  dataType:<span class="string">'text'</span>,</span><br><span class="line">  success:<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      getReturn:res.data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>发起POST请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">  url:<span class="string">'https://a.example.com/test'</span>,</span><br><span class="line">  method:<span class="string">'POST'</span>,</span><br><span class="line">  data:<span class="string">'123'</span>,</span><br><span class="line">  dataType:<span class="string">'text'</span>,</span><br><span class="line">  header:&#123;</span><br><span class="line">    <span class="string">'content-type'</span>:<span class="string">'application/x-www-form-urlencoded'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  success:<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      postReturn:res.data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p>发起POST请求</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">  url:<span class="string">'https://a.example.com/test'</span>,</span><br><span class="line">  method:<span class="string">'POST'</span>,</span><br><span class="line">  data:<span class="string">'123'</span>,</span><br><span class="line">  dataType:<span class="string">'text'</span>,</span><br><span class="line">  header:&#123;</span><br><span class="line">    <span class="string">'content-type'</span>:<span class="string">'application/x-www-form-urlencoded'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  success:<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      postReturn:res.data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>了解小程序的能力 ?</p>
-<ul>
-<li>（概括的了解其能力，能解决基础的问题）</li>
+<h3 id="了解小程序的能力-（概括的了解其能力，能解决基础的问题）"><a href="#了解小程序的能力-（概括的了解其能力，能解决基础的问题）" class="headerlink" title="了解小程序的能力 ?（概括的了解其能力，能解决基础的问题）"></a>了解小程序的能力 ?（概括的了解其能力，能解决基础的问题）</h3><ul>
 <li>本质上还是前端的内容，提交的小程序会被解析成前端数据</li>
+<li>微信客户端内置浏览器，可以显示页面</li>
 </ul>
+<h3 id="小程序服务端API："><a href="#小程序服务端API：" class="headerlink" title="小程序服务端API："></a>小程序服务端API：</h3><ul>
+<li><p>调用小程序服务端API需要AppID和AppSecret</p>
 </li>
-<li><p>小程序服务端API：</p>
-<ul>
-<li>调用小程序服务端API需要AppID和AppSecret</li>
-<li>获取 access_token</li>
-<li>URL参数携带 access_token调用API</li>
-</ul>
+<li><p>获取 access_token</p>
+</li>
+<li><p>URL参数携带 access_token调用API</p>
 <p><img src="https://i.loli.net/2019/11/18/yRJsl6OAH1mMuTU.jpg" alt="TIM截图20191118235228.jpg"></p>
 </li>
 </ul>
 <hr>
-<h2 id="公众号："><a href="#公众号：" class="headerlink" title="公众号："></a>公众号：</h2><ol>
-<li>客户端-微信服务器-开发者服务器之间的通信<ul>
-<li>开启服务器配置页面需要填写服务器地址和令牌</li>
-<li>url（服务器地址）是开发者服务器的url，微信服务器会把用户发给公众号的消息转发至此</li>
-<li>token（令牌）用于验证过程，开发者自己填写，微信服务器使用token生成验证签名，开发者通过签名，验证请求来自微信服务器</li>
+<h2 id="公众号："><a href="#公众号：" class="headerlink" title="公众号："></a>公众号：</h2><h3 id="客户端-微信服务器-开发者服务器之间的通信"><a href="#客户端-微信服务器-开发者服务器之间的通信" class="headerlink" title="客户端-微信服务器-开发者服务器之间的通信"></a>客户端-微信服务器-开发者服务器之间的通信</h3><ul>
+<li>通信过程的建立需要配置并验证，验证过程微信服务器会发送 GET请求，消息转发是 POST请求，两过程互斥；</li>
+<li>开启服务器配置页面需要填写服务器地址和令牌；</li>
+<li>url（服务器地址）是开发者服务器的url，微信服务器会把用户发给公众号的消息转发至此；</li>
+<li>token（令牌）用于验证过程，开发者自己填写，微信服务器使用token生成验证签名，开发者通过签名，验证请求来自微信服务器；</li>
 <li>//密匙</li>
-<li>//加密模式</li>
+<li>//加密模式<h3 id="调用公众号API"><a href="#调用公众号API" class="headerlink" title="调用公众号API"></a>调用公众号API</h3></li>
 </ul>
-</li>
-<li>调用公众号API</li>
-</ol>
-<p>消息通信：</p>
-<ul>
+<h3 id="消息通信："><a href="#消息通信：" class="headerlink" title="消息通信："></a>消息通信：</h3><ul>
 <li>要进行消息通信，需要开启开发者配置：<ul>
 <li>URL：开发者服务器的URL，微信服务器会把用户发给公众号的消息消息转发到此</li>
 <li>Token：用于验证过程。开发者自己填写，微信服务器使用 Token生成验证签名，开发者通过签名，验证请求来自微信服务器</li>
@@ -285,16 +302,14 @@
 </ul>
 </li>
 </ul>
-<p><strong>开启服务器配置的验证流程：</strong></p>
-<ol>
+<h3 id="开启服务器配置的验证流程："><a href="#开启服务器配置的验证流程：" class="headerlink" title="开启服务器配置的验证流程："></a><strong>开启服务器配置的验证流程：</strong></h3><ol>
 <li>开发者设置URL，并在开发者服务器启动Web服务</li>
 <li>填写Token和开发者服务器的Token一致</li>
 <li>点击确认，腾讯服务器向开发者服务器URL发起请求</li>
 <li>开发者服务器接收请求并验证数据是否合法</li>
 <li>合法则返回指定值</li>
 </ol>
-<p><strong>验证过程请求数据的处理：</strong></p>
-<ul>
+<h3 id="验证过程请求数据的处理："><a href="#验证过程请求数据的处理：" class="headerlink" title="验证过程请求数据的处理："></a><strong>验证过程请求数据的处理：</strong></h3><ul>
 <li>微信服务器向开发者服务器URL请求并携带以下参数：<br>signature、timestamp、nonce、echostr</li>
 <li>开发者服务器按照以下方式验证signature是否合法：<ul>
 <li>把token、timestamp、nonce字典排序</li>
@@ -313,23 +328,19 @@
 <li>必须有<code>&lt;person&gt;</code>根元素</li>
 <li>属性必须加引号</li>
 </ul>
-<p>如果开发者服务器不需要回复消息：</p>
-<ol>
+<h3 id="如果开发者服务器不需要回复消息："><a href="#如果开发者服务器不需要回复消息：" class="headerlink" title="如果开发者服务器不需要回复消息："></a>如果开发者服务器不需要回复消息：</h3><ol>
 <li>返回空字符串</li>
 <li>返回success</li>
 </ol>
-<p>公众号接口的调用：</p>
-<ul>
+<h3 id="公众号接口的调用："><a href="#公众号接口的调用：" class="headerlink" title="公众号接口的调用："></a>公众号接口的调用：</h3><ul>
 <li>和小程序调用过程一致，都要先获取access_token</li>
 <li>access_token接口每天可调用2000次</li>
 <li>重新调用会导致上次获取的失效</li>
 </ul>
-<p>区分公众号和小程序的AppID和AppSecret：</p>
-<ul>
+<h3 id="区分公众号和小程序的AppID和AppSecret："><a href="#区分公众号和小程序的AppID和AppSecret：" class="headerlink" title="区分公众号和小程序的AppID和AppSecret："></a>区分公众号和小程序的AppID和AppSecret：</h3><ul>
 <li>两个不是相同的，也并无关联</li>
 </ul>
-<p>测试号：</p>
-<ul>
+<h3 id="测试号："><a href="#测试号：" class="headerlink" title="测试号："></a>测试号：</h3><ul>
 <li>测试号的一些特点和限制：<ul>
 <li>可以调用大部分高级接口用于开发测试</li>
 <li>无法设置头像和名称</li>
