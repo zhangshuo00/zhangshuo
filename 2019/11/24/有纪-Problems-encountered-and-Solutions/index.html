@@ -9,7 +9,7 @@
 
 
 
-<title>Hello World | 不爱吃萝卜的兔子</title>
+<title>有纪-Problems encountered and Solutions | 不爱吃萝卜的兔子</title>
 
 
 
@@ -171,7 +171,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Hello World</h1>
+            <h1 class="post-title">有纪-Problems encountered and Solutions</h1>
             
                 <div class="post-meta">
                     
@@ -180,7 +180,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 9, 2019&nbsp;&nbsp;18:28:55</a>
+                        Date: <a href="#">November 24, 2019&nbsp;&nbsp;10:56:39</a>
                         </span>
                     
                     
@@ -189,19 +189,20 @@
         </header>
 
         <div class="post-content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+            <h2 id="项目框架"><a href="#项目框架" class="headerlink" title="项目框架"></a>项目框架</h2><p>基于 <code>react-express-webpack</code> 的项目框架进行开发</p>
+<h2 id="搭建脚手架以及文件打包"><a href="#搭建脚手架以及文件打包" class="headerlink" title="搭建脚手架以及文件打包"></a>搭建脚手架以及文件打包</h2><h3 id="webpack-无法将“webpack”项识别为-cmdlet、函数、脚本文件或可运行程序的名称"><a href="#webpack-无法将“webpack”项识别为-cmdlet、函数、脚本文件或可运行程序的名称" class="headerlink" title="webpack : 无法将“webpack”项识别为 cmdlet、函数、脚本文件或可运行程序的名称"></a>webpack : 无法将“webpack”项识别为 cmdlet、函数、脚本文件或可运行程序的名称</h3><p>需全局安装 webpack ，<code>npm install -g webpack</code>，把node_global加入到环境变量。</p>
+<h3 id="使用webpack构建本地服务器"><a href="#使用webpack构建本地服务器" class="headerlink" title="使用webpack构建本地服务器"></a>使用webpack构建本地服务器</h3><p><code>npm install --save-dev webpack-dev-server</code><br>浏览器监听代码的修改，并自动刷新显示修改后的结果<br>在终端中输入<code>npm run server</code>即可在本地的8080端口查看结果</p>
+<h3 id="关于webpack中的Babel"><a href="#关于webpack中的Babel" class="headerlink" title="关于webpack中的Babel"></a>关于webpack中的Babel</h3><p>Babel是一个编译JavaScript的平台</p>
+<ul>
+<li>可以使用最新的JavaScript代码（ES6,ES7…），而不管新标准是否被当前使用的浏览器完全支持；</li>
+<li>可以使用基于JavaScript拓展的语言，比如React中的JSX；<br><code>npm install --save-dev babel-core babel-loader babel-preset-env babel-preset-react</code> 安装多个依赖模块，模块之间用空格隔开</li>
+</ul>
+<p>配置babel，可以使用es6和jsx语法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">        &#123;</span><br><span class="line">            test: <span class="regexp">/(\.jsx|\.js)$/</span>,</span><br><span class="line">            use: &#123;</span><br><span class="line">                loader: <span class="string">"babel-loader"</span>,</span><br><span class="line">                options: &#123;</span><br><span class="line">                    presets: [</span><br><span class="line">                        <span class="string">"env"</span>, <span class="string">"react"</span></span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            exclude: <span class="regexp">/node_modules/</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h3 id="安装react-和-react-dom"><a href="#安装react-和-react-dom" class="headerlink" title="安装react 和 react-dom"></a>安装react 和 react-dom</h3><p><code>npm install --save react react-dom</code></p>
+<hr>
+<h2 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h2><p><code>app</code>文件夹存放原始数据和js模块，<code>public</code>文件夹用来存放供浏览器读取的文件（包括使用webpack打包生成的js文件和index.html）</p>
 
         </div>
 
@@ -216,7 +217,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://yoursite.com/2019/07/09/hello-world/">http://yoursite.com/2019/07/09/hello-world/</a></span>
+                        <span><a href="http://yoursite.com/2019/11/24/有纪-Problems-encountered-and-Solutions/">http://yoursite.com/2019/11/24/有纪-Problems-encountered-and-Solutions/</a></span>
                     </p>
                 
                 
@@ -249,8 +250,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/07/10/test-one/">test_one</a>
             
+            <a class="next" rel="next" href="/2019/11/06/微信期末提纲/">微信期末提纲</a>
             
         </section>
 

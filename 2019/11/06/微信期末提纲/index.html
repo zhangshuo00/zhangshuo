@@ -225,8 +225,8 @@
 </li>
 </ul>
 <h3 id="一些标签和属性"><a href="#一些标签和属性" class="headerlink" title="一些标签和属性"></a>一些标签和属性</h3><ul>
-<li><image src mode></image></li>
-<li><camera></camera></li>
+<li><code>&lt;image src=&#39;&#39; mode=&#39;&#39;&gt;&lt;/image&gt;</code></li>
+<li><code>&lt;camera&gt;&lt;/camera&gt;</code></li>
 <li>wx.getSystemInfo  获取系统信息</li>
 <li>wx.getBatteryInfo 获取电量信息</li>
 <li>wx.getNetworkType 网络状态信息</li>
@@ -263,7 +263,8 @@
 </li>
 <li><p>通过API中的 wx.request 可以发起网络请求</p>
 </li>
-<li><p>常用的请求类型：GET、POST、PUT、DELETE、OPTIONS<br>发起GET请求</p>
+<li><p>常用的请求类型：GET、POST、PUT、DELETE、OPTIONS</p>
+<p>发起GET请求</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">  url:<span class="string">'https://a.example.com/test'</span>,</span><br><span class="line">  data:&#123;<span class="attr">name</span>:<span class="string">'zhangsan'</span>&#125;,</span><br><span class="line">  dataType:<span class="string">'text'</span>,</span><br><span class="line">  success:<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      getReturn:res.data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>发起POST请求</p>
@@ -320,8 +321,10 @@
 </ul>
 </li>
 </ul>
-<p>验证过程使用的是<strong>GET请求</strong>；<br>而验证成功后，则会使用<strong>POST请求</strong>转发用户消息。</p>
-<p>转发用户消息以及开发者恢复用户消息的格式：<strong>XML</strong><br>XML是可扩展标记语言，被设计用来格式化数据</p>
+<p>验证过程使用的是<strong>GET请求</strong>；</p>
+<p>而验证成功后，则会使用<strong>POST请求</strong>转发用户消息。</p>
+<p>转发用户消息以及开发者恢复用户消息的格式：<strong>XML</strong></p>
+<p>XML是可扩展标记语言，被设计用来格式化数据</p>
 <ul>
 <li>标签区分大小写</li>
 <li>所有元素必须有闭合标签</li>
@@ -408,6 +411,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/11/24/有纪-Problems-encountered-and-Solutions/">有纪-Problems encountered and Solutions</a>
             
             
             <a class="next" rel="next" href="/2019/11/06/React笔记（五）-redux/">React笔记（五）-redux</a>
